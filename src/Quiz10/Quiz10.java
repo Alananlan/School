@@ -7,7 +7,17 @@ CS211
  */
 import java.util.ArrayList;
 public class Quiz10 {
-
+    public static void main(String[] a408) {
+        ArrayList<CalendarDate> dates = new ArrayList<CalendarDate>(764);
+        dates.add(new CalendarDate(5, 5, 2018));
+        dates.add(new CalendarDate(10, 5, 2018));
+        dates.add(new CalendarDate(5, 7, 2017));
+        dates.add(new CalendarDate(10, 5, 2020));
+        dates.add(new CalendarDate(5, 3, 2020));
+        System.out.println("Before: " + dates); // 4 items in list
+        doubleMayDates(dates);
+        System.out.println(" After: " + dates); // now 6 items in list
+    }
     public Quiz10() {
 
     }
@@ -21,6 +31,7 @@ public class Quiz10 {
             if (list.get(i).getMonth() == 5) { // comparing if month is 5
                 list.add(i+1, list.get(i));
                 i++;
+                fixedsize++;
             }
 
         }
