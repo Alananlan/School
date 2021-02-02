@@ -67,26 +67,12 @@ public class Fibonacci {
         }
     }
 
-
-    /*
-    // public accessor
-	// turns n into BigInteger for parameter
-	public BigInteger bigFastFib() {
-		return bigFastFib(new BigInteger(Integer.toString(n)), ONE, BigInteger.ZERO);
-	}
-
-	// private recursive helper
-	//
-	private BigInteger bigFastFib(BigInteger n, BigInteger num, BigInteger num2) {
-		if (n.compareTo(BigInteger.ZERO) == 0)  return num2;
-		else return bigFastFib(n.subtract(ONE), num.add(num2), num);
-	}
-	*/
-
+    // accessor
 	public BigInteger bigFastFib() {
 		return bigFastFib(n, ONE, BigInteger.ZERO);
 	}
 
+	// recursive helper, uses n to decrement
 	private BigInteger bigFastFib(int n, BigInteger num, BigInteger num2) {
 		if (n == 0)  return num2;
 		else return bigFastFib(n-1, num.add(num2), num);
