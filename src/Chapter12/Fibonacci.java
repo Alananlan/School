@@ -1,6 +1,14 @@
 package Chapter12;
 
 import java.math.BigInteger;
+
+/*
+Alan Ly
+Prof. Iverson
+CS211
+1 February 2021
+ */
+
 /* CS211 Fibonacci Class, for Chapter 12 Assignment
  * Bellevue College, W.P. Iverson, instructor
  * January 2020
