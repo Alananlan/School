@@ -1,4 +1,13 @@
-package Chapter17;// Class SearchTree stores and prints a binary search tree of
+package Chapter17;
+
+/*
+Alan Ly
+Prof. Iverson
+CS211
+8 March 2021
+ */
+
+// Class SearchTree stores and prints a binary search tree of
 // objects of type E.  E must implement the Comparable<E>
 // interface.  from Reges and Stepp, Building Java Programs
 //
@@ -30,7 +39,6 @@ public class SearchTree<E extends Comparable<E>> {
             return false;
         return isFull(root.left) && isFull(root.right);
 
-//      return (root.left != null && root.right != null && isFull(root.left) && isFull(root.right));
     }
 
     public boolean equals(SearchTree<E> t2) {

@@ -30,16 +30,23 @@ public class Post {
 //		test.remove(new CalendarDate(1,1,2017));  test.print(); // all gone
 
 
-		SearchTree<Integer> test = new SearchTree<>();
+		SearchTree<Double> test = new SearchTree<>();
 
-		test.add(5); test.add(2); test.add(3); test.add(1); test.add(5); test.add(10); test.add(7); test.add(11);
+		test.add(3.14); test.add(-42.); test.add(34.1);
+
+		SearchTree<Double> test2 = new SearchTree<>();
+		test2.add(-42.); test2.add(3.14); test2.add(34.1);
 		System.out.println(test.toString());
 		System.out.println(test.isFull());
 
+		System.out.println("EQUALS " + test.equals(test2));
 //		test.removeLeaves();
 //		System.out.println(test.toString());
 
-		test.remove(7);
+		test.add(33.3);
+		System.out.println(test.toString());
+
+		test.remove(33.3);
 		System.out.println(test.toString());
 		System.out.println(test.isFull());
 
