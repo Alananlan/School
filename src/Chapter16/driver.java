@@ -34,6 +34,10 @@ public class driver {
 //        b.removeAll(3);
 //        System.out.println(b);
 
+        LinkedList<Integer> B = new LinkedList<Integer>();
+        B.add(7); B.add(3); B.add(12);
+
+
 
     }
 }

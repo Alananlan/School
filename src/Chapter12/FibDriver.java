@@ -21,7 +21,7 @@ public class FibDriver {
 
 
 
-        Fibonacci test = new Fibonacci(42); // constructor overload
+        Fibonacci test = new Fibonacci(8); // constructor overload
         //System.out.println(test.fibForLoop()); // Chapter 2 code not used this week
         long time1 = System.currentTimeMillis();
         System.out.println(test.fibonacci()); // slow version in text

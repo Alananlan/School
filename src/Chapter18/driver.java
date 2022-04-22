@@ -14,11 +14,11 @@ public class driver {
 //        test.add(7);
 //        test.add(9);
 
-        test.add(71);
-        test.add(91);
+        test.add(80);
         test.add(1);
-        test.add(45);
+        test.add(63);
         test.add(5);
+        test.add(45);
         test.add(7);
         test.add(9);
         test.add(42);

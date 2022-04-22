@@ -69,6 +69,10 @@ public class HashSet<E> {
 
 
 
+
+
+
+
     public String toString2() {
         String result = "";
         HashEntry<E>[] current = elementData;

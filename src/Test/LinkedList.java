@@ -1,16 +1,22 @@
-package Chapter16;
-
+package Test;
 import java.util.*;
+
+
+// Karim Maftoun, CS 211, Winter22, 2/23/2022, February 2022
+// Assignment #16 - Ch.16
+// I am  writing these methods to get more experience with linked lists
+// Bellevue College, W.P. Iverson
+//
 // Class LinkedList<E> can be used to store a list of values of type E.
 // from Buildingjavaprograms.com (2015)
 // modified by W.P. Iverson, Bellevue College, January 2021 
 // added backwards(); to check list in backwards order
 
-public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
-	// 2017, removed implements List due to version differences of List
-    public ListNode<E> front;  // first value in the list
-    public ListNode<E> back;   // last value in the list
-    private int size;           // current number of elements
+public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
+    // 2017, removed implements List due to version differences of List
+    private ListNode<E> front; // first value in the list
+    private ListNode<E> back; // last value in the list
+    private int size; // current number of elements
 
     // NOTE: an empty list has TWO Nodes to mark front and back
     // post: constructs an empty list
@@ -19,60 +25,83 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
         back = new ListNode<E>(null);
         clear();
     }
-    
+
 // ADD MORE METHODS HERE (like for assigned CS211 work):
 
-    public E deleteBack() {
-        if (size < 1)
-            throw new NoSuchElementException();
 
-        E object =  nodeAt(size-1).data;
-        remove(size-1);
 
-        return object;
+    public ListNode<E> set(int index, ListNode<E> value) {
+        checkIndex(index);
+        ListNode<E> returnedValue =  this.nodeAt(index);
+
+
+            ListNode<E> current = (ListNode<E>) nodeAt(index);
+            current.data = (E) value.data;
+
+
+        return returnedValue;
+
     }
 
+    
+
+    // #7
+    public E deleteBack() {
+        if (size < 1) { // Exception if the list is empty
+            throw new NoSuchElementException();
+        }
+        E object = nodeAt(size - 1).data; // stores data into E object
+        remove(size - 1); // removed the element
+
+        return object; // return the object
+    }
+
+    // #8
     public void switchPairs() {
         int i = 0;
-
-        while(i < size-1) {
-            E currentObject = nodeAt(i).data;
-            set(i, nodeAt(i + 1).data);
-            set(i + 1, currentObject);
-            i+=2;
+        while (i < size - 1) { // goes through the list
+            E tempObject = nodeAt(i).data; // stores an element
+            set(i, nodeAt(i + 1).data); // sets the values to their counterparts
+            set(i + 1, tempObject);
+            i += 2; // increment i
         }
     }
 
+    // #9
     public void stutter() {
-        int initialSize = size;
+        int oldSize = size; // save size
         int i = 0;
 
-        while (i < initialSize * 2) {
-            E currentObject = nodeAt(i).data;
-            add(i+1, currentObject);
-            i+=2;
+        while (i < oldSize * 2) { // goes through the list of twice the size
+            E tempObject = nodeAt(i).data; // stores the element
+            add(i + 1, tempObject); // adds a replica
+            i += 2; // increment i
         }
     }
 
+    // #14
     public void removeAll(E object) {
-            LinkedIterator iterator = new LinkedIterator();
+        ListNode<E> previous = front; // previous node
+        ListNode<E> current = front.next; // current node
+        while (size > 0 && current.data.equals(object)) { // traverse the list
+            current = current.next; // removes and updates pointers
+            current.prev = previous;
+            previous.next = current;
+            size--; // update size
+        }
 
-            while(iterator.hasNext()) {
-                if(iterator.next().compareTo(object) == 0) {
-                    iterator.remove();
-                }
+        while (size > 0 && current.next != null) { // traverse the list
+            if (current.data.equals(object)) {
+                current = current.next; // removes and updates pointers
+                current.prev = previous;
+                previous.next = current;
+                size--; // update size
+            } else { // moves nodes to the next element
+                previous = previous.next;
+                current = current.next;
             }
-
+        }
     }
-
-
-
-
-
-
-
-
-
 
     // post: returns the current number of elements in the list
     public int size() {
@@ -102,7 +131,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
             return result;
         }
     }
-    
+
     // post: creates a comma-separated, bracketed version of the list
     // Iverson creation
     public String backwards() {
@@ -121,11 +150,11 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
     }
 
     // post : returns the position of the first occurrence of the given
-    //        value (-1 if not found)
+    // value (-1 if not found)
     public int indexOf(E value) {
         int index = 0;
         ListNode<E> current = front.next;
-        while (current !=  back) {
+        while (current != back) {
             if (current.data.equals(value)) {
                 return index;
             }
@@ -141,7 +170,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
     }
 
     // post: returns true if the given value is contained in the list,
-    //       false otherwise
+    // false otherwise
     public boolean contains(E value) {
         return indexOf(value) >= 0;
     }
@@ -152,7 +181,8 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
     }
 
     // pre: 0 <= index <= size() (throws IndexOutOfBoundsException if not)
-    // post: inserts the given value at the given index, shifting subsequent values right
+    // post: inserts the given value at the given index, shifting subsequent values
+    // right
     public void add(int index, E value) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("index: " + index);
@@ -166,7 +196,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
 
     // post: appends all values in the given list to the end of this list
     public void addAll(List<E> other) {
-        for (E value: other) {
+        for (E value : other) {
             add(value);
         }
     }
@@ -202,9 +232,9 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
     }
 
     // pre : 0 <= index < size()
-    // post: returns the node at a specific index.  Uses the fact that the list
-    //       is doubly-linked to start from the front or the back, whichever
-    //       is closer.
+    // post: returns the node at a specific index. Uses the fact that the list
+    // is doubly-linked to start from the front or the back, whichever
+    // is closer.
     private ListNode<E> nodeAt(int index) {
         ListNode<E> current;
         if (index < size / 2) {
@@ -222,7 +252,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
     }
 
     // post: throws an IndexOutOfBoundsException if the given index is
-    //       not a legal index of the current list
+    // not a legal index of the current list
     private void checkIndex(int index) {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException("index: " + index);
@@ -230,9 +260,9 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
     }
 
     private static class ListNode<E> {
-        public E data;         // data stored in this node
-        public ListNode<E> next;  // link to next node in the list
-        public ListNode<E> prev;  // link to previous node in the list
+        public E data; // data stored in this node
+        public ListNode<E> next; // link to next node in the list
+        public ListNode<E> prev; // link to previous node in the list
 
         // post: constructs a node with given data and null links
         public ListNode(E data) {
@@ -248,8 +278,8 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
     }
 
     private class LinkedIterator implements Iterator<E> {
-        private ListNode<E> current;  // location of next value to return
-        private boolean removeOK;  // whether it's okay to remove now
+        private ListNode<E> current; // location of next value to return
+        private boolean removeOK; // whether it's okay to remove now
 
         // post: constructs an iterator for the given list
         public LinkedIterator() {
@@ -275,7 +305,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E>{
         }
 
         // pre : next() has been called without a call on remove (i.e., at most
-        //       one call per call on next)
+        // one call per call on next)
         // post: removes the last element returned by the iterator
         public void remove() {
             if (!removeOK) {
